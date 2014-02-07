@@ -22,7 +22,6 @@ ScenesManager.prototype.loop = function() {
 
 ScenesManager.prototype.createScene = function(id, scene) {
 	if(!(typeof ScenesManager.scenes[id] === 'undefined')) return undefined;
-	console.log(scene);
 	if(typeof scene === 'undefined') var scene = new Scene();
 	ScenesManager.scenes[id] = scene;
 	return scene;
