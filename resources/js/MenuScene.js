@@ -1,7 +1,7 @@
 function MenuScene(){
 	Scene.call(this);
 	this.setBackgroundColor(0x99DB57);
-	this.playButton = new PIXI.Sprite(PIXI.Texture.fromImage("ressources/images/play_button.png"));
+	this.playButton = new PIXI.Sprite(PIXI.Texture.fromImage("resources/images/play_button.png"));
 	console.log(this.playButton);
 	this.playButton.setInteractive(true);
 	this.playButton.click = function(){
