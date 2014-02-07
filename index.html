@@ -8,13 +8,25 @@
 				background-color : #000000;
 			}
 			#renderer-container{
-				width          : 1280px;
-				height         : 768px;
-				position       : absolute;
-				left           : 50%;
-				top            : 50%;
-				margin-top     : -384px;
-				margin-left    : -640px;
+		
+			}
+			@media screen
+			and (min-width: 1280px){
+				#renderer-container{
+					width          : 1280px;
+					position       : absolute;
+					left           : 50%;
+					margin-left    : -640px;
+				}
+			}
+			@media screen
+			and (min-height: 768px){
+				#renderer-container{
+					height         : 768px;
+					position       : absolute;
+					top            : 50%;
+					margin-top     : -384px;
+				}
 			}
 		</style>
 		<script type="text/javascript" src="ressources/js/jquery-1.11.0.min.js"></script>
