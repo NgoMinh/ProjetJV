@@ -1,11 +1,13 @@
 function JewelRenderer(texture, jewel){
 	PIXI.Sprite.call(this, texture);
 	this.jewel = jewel;
+	this.controller;
 	this.setInteractive(true);
-	this.click = function(){
-		console.log(this.jewel);
-	}
 }
 
 JewelRenderer.constructor = JewelRenderer;
 JewelRenderer.prototype   = Object.create(PIXI.Sprite.prototype);
+
+JewelRenderer.prototype.setController = function(controller) {
+	this.controller = controller;
+};
