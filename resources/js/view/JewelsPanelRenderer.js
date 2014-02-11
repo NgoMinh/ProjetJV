@@ -5,6 +5,7 @@ function JewelsPanelRenderer(jewelsPanel, scene){
 	this.jewelsPanel      = jewelsPanel;
 	this.scene            = scene;
 	this.jewelsTexture    = new Array();
+	this.controller;
 	this.board.setInteractive(true);
 	this.loadTexture();
 	this.show();
