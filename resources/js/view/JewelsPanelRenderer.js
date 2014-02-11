@@ -19,6 +19,7 @@ JewelsPanelRenderer.MARGIN_TOP  = 50;
 JewelsPanelRenderer.JEWEL_WIDTH = 50;
 JewelsPanelRenderer.JEWEL_HEIGHT= 50;
 JewelsPanelRenderer.SPACE       = 10;
+JewelsPanelRenderer.SPEED       = 5;
 
 JewelsPanelRenderer.prototype.show = function() {
 	this.scene.addChild(this.board);
@@ -39,6 +40,74 @@ JewelsPanelRenderer.prototype.show = function() {
 			this.board.addChild(jewel);
 		}
 	}
+	console.log(this.board.children);
+};
+
+JewelsPanelRenderer.prototype.setController = function(controller) {
+	this.controller = controller;
+};
+
+JewelsPanelRenderer.prototype.update = function() {
+	for(var i = 0; i < this.board.children.length ; i++)
+	{
+		var jewel     = this.board.getChildAt(i).jewel;
+		var idColumn  = this.jewelsPanel.getColumn(jewel);
+		var idLine    = this.jewelsPanel.getLine(jewel);
+		var positionX = ( (JewelsPanel.NUMBER_OF_COLUMN-idColumn-1) * JewelsPanelRenderer.JEWEL_WIDTH ) 
+				       +( (JewelsPanel.NUMBER_OF_COLUMN-idColumn-1) * JewelsPanelRenderer.SPACE );
+		var positionY = ( (JewelsPanel.NUMBER_OF_LINE-idLine-1)     * JewelsPanelRenderer.JEWEL_HEIGHT) 
+				       +( (JewelsPanel.NUMBER_OF_LINE-idLine-1)     * JewelsPanelRenderer.SPACE );
+		if( this.board.getChildAt(i).position.x !== positionX )
+		{
+			if( positionX - this.board.getChildAt(i).position.x > 0 )
+			{
+				if( this.board.getChildAt(i).position.x + JewelsPanelRenderer.SPEED < positionX )
+				{
+					this.board.getChildAt(i).position.x += JewelsPanelRenderer.SPEED;
+				}
+				else
+				{
+					this.board.getChildAt(i).position.x = positionX;
+				}
+			}
+			else if( positionX - this.board.getChildAt(i).position.x < 0 )
+			{
+				if( this.board.getChildAt(i).position.x - JewelsPanelRenderer.SPEED > positionX )
+				{
+					this.board.getChildAt(i).position.x -= JewelsPanelRenderer.SPEED;
+				}
+				else
+				{
+					this.board.getChildAt(i).position.x = positionX;
+				}
+			}
+		}
+		else if( this.board.getChildAt(i).position.y !== positionY )
+		{
+			if( positionY - this.board.getChildAt(i).position.y > 0 )
+			{
+				if( this.board.getChildAt(i).position.y + JewelsPanelRenderer.SPEED < positionY )
+				{
+					this.board.getChildAt(i).position.y += JewelsPanelRenderer.SPEED;
+				}
+				else
+				{
+					this.board.getChildAt(i).position.y = positionY;
+				}
+			}
+			else if( positionY - this.board.getChildAt(i).position.y < 0 )
+			{
+				if( this.board.getChildAt(i).position.y - JewelsPanelRenderer.SPEED > positionY )
+				{
+					this.board.getChildAt(i).position.y -= JewelsPanelRenderer.SPEED;
+				}
+				else
+				{
+					this.board.getChildAt(i).position.y = positionY;
+				}
+			}
+		}
+	}
 };
 
 JewelsPanelRenderer.prototype.loadTexture = function(){
@@ -48,4 +117,4 @@ JewelsPanelRenderer.prototype.loadTexture = function(){
 		var filename = this.jewelsPanel.jewelsType[i].toLowerCase();
 		this.jewelsTexture[key] = PIXI.Texture.fromImage('resources/textures/'+filename+'.png');
 	}
-}
+};
