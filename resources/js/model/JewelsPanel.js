@@ -220,6 +220,7 @@ JewelsPanel.prototype.remove = function(jewel){
  * @param Array<Array<Jewel>> tab
  */
 JewelsPanel.prototype.swap = function(jewel1, jewel2, tab){
+	if(typeof tab === 'undefined') var tab = this.jewels;
 	var jewel1_L = this.getLine(jewel1, tab);
 	var jewel1_C = this.getColumn(jewel1, tab);
 	var jewel2_L = this.getLine(jewel2, tab);
@@ -237,6 +238,7 @@ JewelsPanel.prototype.swap = function(jewel1, jewel2, tab){
  * @return Integer
  */
 JewelsPanel.prototype.getLine = function(jewel, tab) {
+	if(typeof tab === 'undefined') var tab = this.jewels;
 	for(var idLine = 0; idLine < JewelsPanel.NUMBER_OF_LINE ; idLine++)
 	{
 		if(jQuery.inArray(jewel, tab[idLine]) != -1)
@@ -255,6 +257,7 @@ JewelsPanel.prototype.getLine = function(jewel, tab) {
  * @return Integer
  */
 JewelsPanel.prototype.getColumn = function(jewel, tab) {
+	if(typeof tab === 'undefined') var tab = this.jewels;
 	return tab[this.getLine(jewel, tab)].indexOf(jewel);
 };
 
@@ -336,6 +339,7 @@ JewelsPanel.prototype.jewelNeighbor = function(jewel1, jewel2){
  * @param Array<Array<Jewel>> tab
  */
 JewelsPanel.prototype.showContent = function(tab) {
+	if(typeof tab === 'undefined') var tab = this.jewels;
 	for(var idLine = 0; idLine < JewelsPanel.NUMBER_OF_LINE; idLine++)
 	{
 		var stringContent = "";
