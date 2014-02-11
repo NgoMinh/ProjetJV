@@ -49,6 +49,11 @@ JewelsPanel.prototype.init = function(){
 	}while(this.checkSolution() !== true);
 }
 
+/**
+ * return true if the jewel tab got at least one solution else return false
+ *
+ * @return boolean
+ */
 JewelsPanel.prototype.checkSolution = function() {
 	var tab_jewels_copy = this.createCopy();
 	for(var idLine = 0; idLine < JewelsPanel.NUMBER_OF_LINE; idLine++)
@@ -82,6 +87,8 @@ JewelsPanel.prototype.checkSolution = function() {
 
 /**
  * return array with all jewel in a row
+ *
+ * @param Array<Array<Jewel>> tab
  */
 JewelsPanel.prototype.getJewelsInARow = function(tab) {
 	var j_delete_list = new Array();
@@ -174,6 +181,12 @@ JewelsPanel.prototype.getJewelsInARow = function(tab) {
 	return j_delete_list;
 };
 
+
+/**
+ * return a copy of the jewels tab
+ *
+ * @return Array<Array<Jewel>>
+ */
 JewelsPanel.prototype.createCopy = function() {
 	var copy_jewels = new Array();
 	for(var idLine = 0; idLine < JewelsPanel.NUMBER_OF_LINE; idLine++)
@@ -199,8 +212,14 @@ JewelsPanel.prototype.remove = function(jewel){
 	this.jewels.remove(id);
 };
 
+/**
+ * Swap two jewel on the tab
+ *
+ * @param Jewel               jewel1
+ * @param Jewel               jewel2
+ * @param Array<Array<Jewel>> tab
+ */
 JewelsPanel.prototype.swap = function(jewel1, jewel2, tab){
-	
 	var jewel1_L = this.getLine(jewel1, tab);
 	var jewel1_C = this.getColumn(jewel1, tab);
 	var jewel2_L = this.getLine(jewel2, tab);
@@ -210,6 +229,13 @@ JewelsPanel.prototype.swap = function(jewel1, jewel2, tab){
 	tab[jewel2_L][jewel2_C] = jewel1;
 };
 
+/**
+ * return the line of the jewel
+ *
+ * @param  Jewel               jewel
+ * @param  Array<Array<Jewel>> tab
+ * @return Integer
+ */
 JewelsPanel.prototype.getLine = function(jewel, tab) {
 	for(var idLine = 0; idLine < JewelsPanel.NUMBER_OF_LINE ; idLine++)
 	{
@@ -221,13 +247,25 @@ JewelsPanel.prototype.getLine = function(jewel, tab) {
 	return line;
 };
 
+/**
+ * return the column of the jewel  
+ *
+ * @param  Jewel               jewel
+ * @param  Array<Array<Jewel>> tab
+ * @return Integer
+ */
 JewelsPanel.prototype.getColumn = function(jewel, tab) {
 	return tab[this.getLine(jewel, tab)].indexOf(jewel);
 };
 
 
 /**
- * checks if there are not three jewel of the same type in the previous cell in the same column
+ * checks if there are not three jewel of the same type in the previous cell on the same column
+ * if there are three jewel with the same type return true else return false
+ *
+ * @param  Integer idColumn
+ * @param  Integer idLine
+ * @return boolean
  */
 JewelsPanel.prototype.checkColumn = function(idColumn, idLine){
 	//We check the N previous ID if they are the same
@@ -243,7 +281,12 @@ JewelsPanel.prototype.checkColumn = function(idColumn, idLine){
 };
 
 /**
- * checks if there are not three jewel of the same type in the previous cell in the same Line
+ * checks if there are not three jewel of the same type in the previous cell on the same Line
+ * if there are three jewel with the same type return true else return false
+ *
+ * @param  integer idColumn
+ * @param  integer idLine
+ * @return boolean
  */
 JewelsPanel.prototype.checkLine = function(idColumn, idLine){
 	//We check the N previous ID if they are the same
@@ -259,7 +302,38 @@ JewelsPanel.prototype.checkLine = function(idColumn, idLine){
 };
 
 /**
- * Show the state of the console in the table
+ * find if two jewel are neighbor
+ *
+ * @param  Jewel    jewel1
+ * @param  Jewel    jewel2
+ * @return boolean
+ */
+JewelsPanel.prototype.jewelNeighbor = function(jewel1, jewel2){
+	if(this.getLine(jewel1) !== this.getLine(jewel2)
+		&& this.getColumn(jewel1) !== this.getColumn(jewel2))
+	{
+		return false;
+	}
+	else if(this.getLine(jewel1) === this.getLine(jewel2)
+			&& Math.abs( this.getColumn(jewel1) - this.getColumn(jewel2) ) === 1 )
+	{
+		return true;
+	}
+	else if(this.getColumn(jewel1) === this.getColumn(jewel2)
+			&& Math.abs( this.getLine(jewel1) - this.getColumn(jewel2) ) === 1 )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+};
+
+/**
+ * Show the state of the table in the console
+ *
+ * @param Array<Array<Jewel>> tab
  */
 JewelsPanel.prototype.showContent = function(tab) {
 	for(var idLine = 0; idLine < JewelsPanel.NUMBER_OF_LINE; idLine++)
