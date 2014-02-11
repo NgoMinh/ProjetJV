@@ -312,18 +312,18 @@ JewelsPanel.prototype.checkLine = function(idColumn, idLine){
  * @return boolean
  */
 JewelsPanel.prototype.jewelNeighbor = function(jewel1, jewel2){
-	if(this.getLine(jewel1) !== this.getLine(jewel2)
-		&& this.getColumn(jewel1) !== this.getColumn(jewel2))
+	if(this.getLine(jewel1, this.jewels) !== this.getLine(jewel2, this.jewels)
+		&& this.getColumn(jewel1, this.jewels) !== this.getColumn(jewel2, this.jewels))
 	{
 		return false;
 	}
-	else if(this.getLine(jewel1) === this.getLine(jewel2)
-			&& Math.abs( this.getColumn(jewel1) - this.getColumn(jewel2) ) === 1 )
+	else if(this.getLine(jewel1, this.jewels) === this.getLine(jewel2, this.jewels)
+			&& Math.abs( this.getColumn(jewel1, this.jewels) - this.getColumn(jewel2, this.jewels) ) === 1 )
 	{
 		return true;
 	}
-	else if(this.getColumn(jewel1) === this.getColumn(jewel2)
-			&& Math.abs( this.getLine(jewel1) - this.getColumn(jewel2) ) === 1 )
+	else if(this.getColumn(jewel1, this.jewels) === this.getColumn(jewel2, this.jewels)
+			&& Math.abs( this.getLine(jewel1, this.jewels) - this.getLine(jewel2, this.jewels) ) === 1 )
 	{
 		return true;
 	}
